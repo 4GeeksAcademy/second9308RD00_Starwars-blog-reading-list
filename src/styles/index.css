@@ -1,3 +1,7 @@
 /* 
     General Styles
 */
+
+.cardDiv {
+  flex-shrink: 0;
+}
