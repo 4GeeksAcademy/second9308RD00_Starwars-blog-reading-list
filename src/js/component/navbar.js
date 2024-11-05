@@ -1,4 +1,4 @@
-import React, {useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
@@ -25,22 +25,25 @@ export const Navbar = () => {
           >
             Favorites
           </a>
-          <ul className="dropdown-menu">
-            
-            {store.favorites.map(newFavorite)}
+          <ul
+            className="dropdown-menu"
+            style={{ display: store.favorites.length < 1 ? "none" : "" }}
+          >
+            {store.favorites.map((newFavorite) => (
+              <li>
+                <a className="dropdown-item" href="#">
+                  {newFavorite.name}
+                </a>
+                <button
+                  onClick={() => actions.deleteFavorite(newFavorite.name)}
+                >
+                  <i className="fas fa-trash-alt"></i>
+                </button>
+              </li>
+            ))}
           </ul>
         </li>
       </div>
     </nav>
   );
 };
-
-
-            <li>
-              <a className="dropdown-item" href="#">
-                Action
-              </a>
-              <button>
-                <i className="fas fa-trash-alt"></i>
-              </button>
-            </li>

@@ -26,8 +26,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       deleteFavorite: (name) => {
-        let fileredArray = getStore().favorites.filter((element) => {
-          element.name != name;
+        let filteredArray = getStore().favorites.filter((element) => {
+          return element.name != name;
         });
         //filter a favortie from copy of favorites array
         setStore({
