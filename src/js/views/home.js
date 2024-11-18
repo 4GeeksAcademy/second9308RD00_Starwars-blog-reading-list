@@ -8,15 +8,14 @@ export const Home = () => {
   const [planets, setPlanets] = useState([]);
 
   useEffect(() => {
-    fetch("https://www.swapi.tech/api/people")
+    fetch("https://glowing-rotary-phone-xgx7jq4974qh67wx-3000.app.github.dev/get/initial")
       .then((response) => response.json())
-      .then((jsonifiedData) => setCharacters(jsonifiedData.results))
+      .then((jsonifiedData) => {
+        setPlanets(jsonifiedData.planet_records)
+        setCharacters(jsonifiedData.character_records)})
       .catch((err) => console.log(err));
 
-    fetch("https://www.swapi.tech/api/planets")
-      .then((response) => response.json())
-      .then((jsonifiedData) => setPlanets(jsonifiedData.results))
-      .catch((err) => console.log(err));
+    
   }, []);
 
   return (

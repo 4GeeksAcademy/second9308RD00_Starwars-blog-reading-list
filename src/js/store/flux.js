@@ -17,12 +17,10 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       addFavorite: (name, uid, type) => {
-        let newFave = { name: name, uid: uid, type: type };
-        let newArr = [...getStore().favorites, newFave];
-        //make some changes to favorites array locally
-        setStore({
-          favorites: newArr, //local updated favorites array
-        });
+        fetch("https://glowing-rotary-phone-xgx7jq4974qh67wx-3000.app.github.dev/get/initial/favorite/char")
+      .then((response) => response.json())
+      .then((jsonifiedData) => { console.log(jsonifiedData)})
+      .catch((err) => console.log(err));
       },
 
       deleteFavorite: (name) => {

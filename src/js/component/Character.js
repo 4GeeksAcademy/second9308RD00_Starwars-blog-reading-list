@@ -5,8 +5,9 @@ import { Context } from "../store/appContext";
 export const Character = ({ char }) => {
   const { store, actions } = useContext(Context);
   const [character, setCharacter] = useState([]);
+
   useEffect(() => {
-    fetch("https://www.swapi.tech/api/people/" + char.uid)
+    fetch("https://www.swapi.tech/api/people/" + char.id)
       .then((response) => response.json())
       .then((jsonifiedData) => setCharacter(jsonifiedData.result.properties))
       .catch((err) => console.log(err));
@@ -25,7 +26,7 @@ export const Character = ({ char }) => {
           <p className="card-text">Gender: {character.gender}</p>
           <p className="card-text">Hair Color: {character.hair_color}</p>
           <p className="card-text">Eye-Color: {character.eye_color}</p>
-          <Link to={"/detailschar/" + char.uid}>
+          <Link to={"/detailschar/" + char.id}>
             <button
               href={character.url}
               target="_blank"
@@ -36,7 +37,7 @@ export const Character = ({ char }) => {
           </Link>
           <button
             onClick={() =>
-              actions.addFavorite(character.name, char.uid, "people")
+              actions.addFavorite(character.name, char.id, "people")
             }
             className="btn btn-primary"
           >
