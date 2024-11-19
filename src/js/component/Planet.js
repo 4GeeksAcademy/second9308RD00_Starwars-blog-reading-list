@@ -7,10 +7,12 @@ export const Planet = ({ plan }) => {
 
   const [planet, setPlanet] = useState([]);
   useEffect(() => {
+
     fetch("https://www.swapi.tech/api/planets/" + plan.id)
       .then((response) => response.json())
       .then((jsonifiedData) => setPlanet(jsonifiedData.result.properties))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err)); 
+
   }, []);
   return (
     <div className="m-3">
@@ -29,7 +31,7 @@ export const Planet = ({ plan }) => {
           </button>
         </Link>
         <button
-          onClick={() => actions.addFavorite(planet.name, plan.id, "planets")}
+          onClick={() => actions.addFavorite(planet.name, store.userID, plan.id, "planets")}
           className="btn btn-primary"
         >
           <i className="fal fa-heart"></i>

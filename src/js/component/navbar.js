@@ -1,9 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
+
+  /*useEffect (() => {
+    const connection = createConnection(serverUrl, roomId);
+    connection.connect();
+    return () => {
+      connection.disconnect();
+    };
+  }, [serverUrl, roomId]);*/
+
+
+
   return (
     <nav className="navbar navbar-light bg-light mb-3">
       <Link to="/">
@@ -29,18 +40,21 @@ export const Navbar = () => {
             className="dropdown-menu"
             style={{ display: store.favorites.length < 1 ? "none" : "" }}
           >
-            {store.favorites.map((newFavorite) => (
-              <li>
-                <a className="dropdown-item" href="#">
-                  {newFavorite.name}
-                </a>
-                <button
-                  onClick={() => actions.deleteFavorite(newFavorite.name)}
-                >
-                  <i className="fas fa-trash-alt"></i>
-                </button>
-              </li>
-            ))}
+            {
+              store.favorites && store.favorites.map(newFavorite => {
+                return (
+                  <li>
+                    <a className="dropdown-item" href="#">
+                      {newFavorite.name}
+                    </a>
+                    <button
+                      onClick={() => actions.deleteFavorite(newFavorite.name)}
+                    >
+                      <i className="fas fa-trash-alt"></i>
+                    </button>
+                  </li>
+                )
+              })}
           </ul>
         </li>
       </div>

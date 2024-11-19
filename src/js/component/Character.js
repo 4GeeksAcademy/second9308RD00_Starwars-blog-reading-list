@@ -2,19 +2,21 @@ import React, { Component, useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Character = ({ char }) => {
+export const Character = ({ character }) => {
   const { store, actions } = useContext(Context);
-  const [character, setCharacter] = useState([]);
+  
 
-  useEffect(() => {
-    fetch("https://www.swapi.tech/api/people/" + char.id)
-      .then((response) => response.json())
-      .then((jsonifiedData) => setCharacter(jsonifiedData.result.properties))
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://www.swapi.tech/api/people/" + char.id)
+  //   .then((response) => response.json())
+  //   .then((jsonifiedData) => setCharacter(jsonifiedData.result.properties))
+  //   .catch((err) => console.log(err)); 
+
+
+  // }, []);
 
   return (
-    <div className="cardDiv mx-2" style={{ width: "18rem" }}>
+    <div className="cardDiv mx-2" style={{ width: "18rem"}}>
       <div className="m-3 ">
         <img
           className="card-img-top"
@@ -26,7 +28,7 @@ export const Character = ({ char }) => {
           <p className="card-text">Gender: {character.gender}</p>
           <p className="card-text">Hair Color: {character.hair_color}</p>
           <p className="card-text">Eye-Color: {character.eye_color}</p>
-          <Link to={"/detailschar/" + char.id}>
+          <Link to={"/detailschar/" + character.id}>
             <button
               href={character.url}
               target="_blank"
@@ -37,7 +39,7 @@ export const Character = ({ char }) => {
           </Link>
           <button
             onClick={() =>
-              actions.addFavorite(character.name, char.id, "people")
+              actions.addFavorite(character.name, store.userID, character.id, "people")
             }
             className="btn btn-primary"
           >
